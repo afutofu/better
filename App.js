@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 import AddTask from "./src/features/task/AddTask";
+import TaskList from "./src/features/task/TaskList";
 
 export default function App() {
   const [tasks, setTasks] = useState(["Meditate", "English Essay"]);
@@ -23,6 +24,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <AddTask addTask={addTask} />
+      <TaskList tasks={tasks} />
     </SafeAreaView>
   );
 }
