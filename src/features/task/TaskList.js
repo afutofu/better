@@ -1,19 +1,30 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ navigation, tasks }) => {
   return (
     <View style={styles.container}>
-      {tasks.length > 0 && (
+      {tasks && tasks.length > 0 && (
         <>
           <FlatList
             contentContainerStyle={styles.list}
             data={tasks}
             renderItem={({ item, index }) => {
               return (
-                <Text key={index} style={styles.taskItem}>
-                  {item}
-                </Text>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    navigation.navigate("Task Timer", { task: item })
+                  }
+                >
+                  <Text style={styles.taskItem}>{item}</Text>
+                </TouchableOpacity>
               );
             }}
           />

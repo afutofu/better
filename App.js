@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./src/screens/HomeScreen";
+import TimerScreen from "./src/screens/TimerScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,9 @@ export default function App() {
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home">
           {(props) => <HomeScreen {...props} tasks={tasks} addTask={addTask} />}
+        </Stack.Screen>
+        <Stack.Screen name="Task Timer">
+          {(props) => <TimerScreen {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
