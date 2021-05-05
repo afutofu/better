@@ -23,10 +23,11 @@ const TaskList = ({ navigation, tasks }) => {
                     navigation.navigate("Task Timer", { task: item })
                   }
                 >
-                  <Text style={styles.taskItem}>{item}</Text>
+                  <Text style={styles.taskItem}>{item.name}</Text>
                 </TouchableOpacity>
               );
             }}
+            keyExtractor={(item) => item.id}
           />
         </>
       )}
