@@ -6,7 +6,7 @@ const TimerScreen = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{task}</Text>
+      <Text>{task.name}</Text>
       <View style={styles.timer}>
         <Text>03:53</Text>
       </View>
