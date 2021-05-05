@@ -8,6 +8,17 @@ import {
 } from "react-native";
 
 const TaskList = ({ navigation, tasks }) => {
+  const formatTime = (secs) => {
+    console.log(secs);
+    const hours = Math.floor(secs / 3600);
+    const minutes = Math.floor((secs - hours * 3600) / 60);
+    const seconds = secs - hours * 3600 - minutes * 60;
+
+    if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
+    if (minutes > 0) return `${minutes}m ${seconds}s`;
+    return `${secs}s`;
+  };
+
   return (
     <View style={styles.container}>
       {tasks && tasks.length > 0 && (
@@ -22,8 +33,10 @@ const TaskList = ({ navigation, tasks }) => {
                   onPress={() =>
                     navigation.navigate("Task Timer", { task: item })
                   }
+                  style={styles.taskItem}
                 >
-                  <Text style={styles.taskItem}>{item.name}</Text>
+                  <Text style={styles.taskName}>{item.name}</Text>
+                  <Text>{formatTime(item.time)}</Text>
                 </TouchableOpacity>
               );
             }}
@@ -46,8 +59,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   taskItem: {
-    fontSize: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 10,
+  },
+  taskName: {
+    fontSize: 16,
   },
 });
 
