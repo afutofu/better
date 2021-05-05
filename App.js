@@ -1,9 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import AddTask from "./src/features/task/AddTask";
-import TaskList from "./src/features/task/TaskList";
+import HomeScreen from "./src/screens/HomeScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [tasks, setTasks] = useState(["Meditate", "English Essay"]);
@@ -21,17 +22,12 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <AddTask addTask={addTask} />
-      <TaskList tasks={tasks} />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Home">
+          {(props) => <HomeScreen {...props} tasks={tasks} addTask={addTask} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
