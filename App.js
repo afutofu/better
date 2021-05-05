@@ -8,16 +8,20 @@ import TimerScreen from "./src/screens/TimerScreen";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [tasks, setTasks] = useState(["Meditate", "English Essay"]);
+  const [tasks, setTasks] = useState([
+    { id: 0, name: "Meditate", time: 530 },
+    { id: 1, name: "English Essay", time: 7000 },
+  ]);
 
   useEffect(() => {
     console.log(tasks);
   }, [tasks]);
 
   const addTask = (task) => {
+    const newTask = { id: Date.now(), name: task, time: 0 };
     if (task) {
       setTasks((prevTasks) => {
-        return [task, ...prevTasks];
+        return [newTask, ...prevTasks];
       });
     }
   };
