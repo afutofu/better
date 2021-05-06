@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 
+import RoundedButton from "../../components/RoundedButton";
+
 const AddTask = ({ addTask }) => {
   const [task, setTask] = useState("");
 
@@ -17,12 +19,9 @@ const AddTask = ({ addTask }) => {
         value={task}
         onChangeText={(text) => setTask(text)}
       />
-      <Button
-        onPress={() => onAddTask(task)}
-        title="+"
-        color="#841584"
-        style={styles.button}
-      />
+      <RoundedButton onPress={() => onAddTask(task)} size={45}>
+        +
+      </RoundedButton>
     </View>
   );
 };
@@ -37,9 +36,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-  },
-  button: {
-    borderRadius: 10,
+    fontSize: 20,
   },
 });
 
