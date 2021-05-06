@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -7,7 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const TaskList = ({ navigation, tasks }) => {
+import { TasksContext } from "../../contexts/tasks.context";
+
+const TaskList = ({ navigation }) => {
+  const { tasks } = useContext(TasksContext);
+
   const formatTime = (secs) => {
     console.log(secs);
     const hours = Math.floor(secs / 3600);
@@ -36,7 +40,7 @@ const TaskList = ({ navigation, tasks }) => {
                   style={styles.taskItem}
                 >
                   <Text style={styles.taskName}>{item.name}</Text>
-                  <Text>{formatTime(item.time)}</Text>
+                  <Text style={styles.timeAmount}>{formatTime(item.time)}</Text>
                 </TouchableOpacity>
               );
             }}
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   taskName: {
+    fontSize: 20,
+  },
+  timeAmount: {
     fontSize: 16,
   },
 });
