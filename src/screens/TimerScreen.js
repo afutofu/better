@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import RoundedButton from "../components/RoundedButton";
+import Timer from "../features/timer/Timer";
 
 const TimerScreen = ({ route }) => {
   const { task } = route.params;
@@ -20,7 +21,7 @@ const TimerScreen = ({ route }) => {
         <Text style={styles.title}>{task.name}</Text>
       </View>
       <View style={styles.timer}>
-        <Text style={styles.time}>03:53</Text>
+        <Timer initialTime={task.time} />
       </View>
       <View style={styles.controls}>
         <RoundedButton size={95} textStyle={styles.buttonTextStyle}>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   titleArea: {
-    flex: 0.1,
+    flex: 0.2,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -57,9 +58,6 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: "center",
     alignItems: "center",
-  },
-  time: {
-    fontSize: 120,
   },
   controls: {
     flex: 0.3,
@@ -74,6 +72,7 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "aquamarine",
   },
 });
 
