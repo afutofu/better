@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 
 import RoundedButton from "../../components/RoundedButton";
 
-const AddTask = ({ addTask }) => {
+import { TasksContext } from "../../contexts/tasks.context";
+
+const AddTask = () => {
   const [task, setTask] = useState("");
+  const { addTask } = useContext(TasksContext);
 
   const onAddTask = (task) => {
     addTask(task);
