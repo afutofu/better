@@ -4,8 +4,8 @@ export const TasksContext = createContext();
 
 export const TasksContextProvider = ({ children }) => {
   const [tasks, setTasks] = useState([
-    { id: 0, name: "Meditate", time: 530 },
-    { id: 1, name: "English Essay", time: 7000 },
+    { id: 0, name: "Meditate", time: 0 },
+    { id: 1, name: "English Essay", time: 700 },
   ]);
 
   useEffect(() => {
