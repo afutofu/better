@@ -1,7 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const Timer = ({ initialTime }) => {
+const Timer = ({ initialTime, timerOn, setTime }) => {
+  const interval = useRef(null);
+  const [seconds, setSeconds] = useState(initialTime);
+
+  const countUp = () => {
+    setSeconds((prevTime) => {
+      const timeLeft = prevTime + 1;
+
+      return timeLeft;
+    });
+  };
+
   const formatTime = (secs) => {
     console.log(secs);
     let hours = Math.floor(secs / 3600);
@@ -21,9 +32,21 @@ const Timer = ({ initialTime }) => {
     return `${minutes}:${seconds}`;
   };
 
+  useEffect(() => {
+    if (!timerOn) {
+      if (interval.current) clearInterval(interval.current);
+      setTime(seconds);
+      return;
+    }
+
+    interval.current = setInterval(countUp, 1000);
+
+    return () => clearInterval(interval.current);
+  }, [timerOn]);
+
   return (
     <View style={styles.timer}>
-      <Text style={styles.time}>{formatTime(initialTime)}</Text>
+      <Text style={styles.time}>{formatTime(seconds)}</Text>
     </View>
   );
 };
