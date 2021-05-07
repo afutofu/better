@@ -21,11 +21,26 @@ export const TasksContextProvider = ({ children }) => {
     }
   };
 
+  const saveTaskTime = (taskId, time) => {
+    setTasks((prevTasks) => {
+      return prevTasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            time,
+          };
+        }
+        return task;
+      });
+    });
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks,
         addTask,
+        saveTaskTime,
       }}
     >
       {children}
