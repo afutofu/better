@@ -14,7 +14,6 @@ const Timer = ({ initialTime, timerOn, setTime }) => {
   };
 
   const formatTime = (secs) => {
-    console.log(secs);
     let hours = Math.floor(secs / 3600);
     let minutes = Math.floor((secs - hours * 3600) / 60);
     let seconds = secs - hours * 3600 - minutes * 60;
