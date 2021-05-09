@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   Platform,
@@ -6,24 +6,31 @@ import {
   Text,
   View,
   SafeAreaView,
-  ScrollView,
 } from "react-native";
 
 import RoundedButton from "../components/RoundedButton";
 import Timer from "../features/timer/Timer";
+import TimeHistory from "../features/timer/TimeHistory";
 
 import { TasksContext } from "../contexts/tasks.context";
 
 const TimerScreen = ({ route }) => {
   const { task } = route.params;
-  const [time, setTime] = useState(task.time);
+  const [time, setTime] = useState(0);
+  const [timeHistory, setTimeHistory] = useState(task.timeHistory);
   const [timerOn, setTimerOn] = useState(false);
 
-  const { saveTaskTime } = useContext(TasksContext);
+  const { tasks, saveTaskTime } = useContext(TasksContext);
 
   const onSaveTime = (time) => {
-    saveTaskTime(task.id, time);
+    if (!timerOn) {
+      saveTaskTime(task.id, time);
+    }
   };
+
+  useEffect(() => {
+    setTimeHistory(tasks[task.id].timeHistory);
+  }, [tasks]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,7 +70,9 @@ const TimerScreen = ({ route }) => {
           Clear
         </RoundedButton>
       </View>
-      <View style={styles.data}></View>
+      <View style={styles.data}>
+        <TimeHistory history={timeHistory} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -99,8 +108,6 @@ const styles = StyleSheet.create({
   },
   data: {
     flex: 0.3,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "aquamarine",
   },
 });
