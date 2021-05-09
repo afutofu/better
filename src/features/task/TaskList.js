@@ -13,7 +13,6 @@ const TaskList = ({ navigation }) => {
   const { tasks } = useContext(TasksContext);
 
   const formatTime = (secs) => {
-    console.log(secs);
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs - hours * 3600) / 60);
     const seconds = secs - hours * 3600 - minutes * 60;
@@ -26,27 +25,25 @@ const TaskList = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {tasks && tasks.length > 0 && (
-        <>
-          <FlatList
-            contentContainerStyle={styles.list}
-            data={tasks}
-            renderItem={({ item, index }) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() =>
-                    navigation.navigate("Task Timer", { task: item })
-                  }
-                  style={styles.taskItem}
-                >
-                  <Text style={styles.taskName}>{item.name}</Text>
-                  <Text style={styles.timeAmount}>{formatTime(item.time)}</Text>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(item) => item.id}
-          />
-        </>
+        <FlatList
+          contentContainerStyle={styles.list}
+          data={tasks}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() =>
+                  navigation.navigate("Task Timer", { task: item })
+                }
+                style={styles.taskItem}
+              >
+                <Text style={styles.taskName}>{item.name}</Text>
+                <Text style={styles.timeAmount}>{formatTime(item.time)}</Text>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item) => item.id}
+        />
       )}
     </View>
   );
