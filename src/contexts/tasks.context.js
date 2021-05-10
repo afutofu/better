@@ -44,12 +44,28 @@ export const TasksContextProvider = ({ children }) => {
     });
   };
 
+  const clearTimeHistory = (taskId) => {
+    setTasks((prevTasks) => {
+      return prevTasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            time: 0,
+            timeHistory: [],
+          };
+        }
+        return task;
+      });
+    });
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks,
         addTask,
         saveTaskTime,
+        clearTimeHistory,
       }}
     >
       {children}
