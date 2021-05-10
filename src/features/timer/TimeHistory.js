@@ -14,10 +14,11 @@ const TimeHistory = ({ history }) => {
 
   return (
     <View style={styles.container}>
-      {history && history.length && (
+      {history && history.length > 0 && (
         <FlatList
           contentContainerStyle={styles.list}
           data={history}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             return (
               <View key={index} style={styles.timeItem}>
@@ -26,7 +27,6 @@ const TimeHistory = ({ history }) => {
               </View>
             );
           }}
-          keyExtractor={(item) => item.id}
         />
       )}
     </View>

@@ -28,6 +28,7 @@ const TaskList = ({ navigation }) => {
         <FlatList
           contentContainerStyle={styles.list}
           data={tasks}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
@@ -42,7 +43,6 @@ const TaskList = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(item) => item.id}
         />
       )}
     </View>
