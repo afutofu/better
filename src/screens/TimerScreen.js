@@ -20,7 +20,7 @@ const TimerScreen = ({ route }) => {
   const [timeHistory, setTimeHistory] = useState(task.timeHistory);
   const [timerOn, setTimerOn] = useState(false);
 
-  const { tasks, saveTaskTime } = useContext(TasksContext);
+  const { tasks, saveTaskTime, clearTimeHistory } = useContext(TasksContext);
 
   const onSaveTime = (time) => {
     if (!timerOn) {
@@ -66,7 +66,11 @@ const TimerScreen = ({ route }) => {
           </RoundedButton>
         )}
 
-        <RoundedButton size={95} textStyle={styles.buttonTextStyle}>
+        <RoundedButton
+          size={95}
+          textStyle={styles.buttonTextStyle}
+          onPress={() => clearTimeHistory(task.id)}
+        >
           Clear
         </RoundedButton>
       </View>
