@@ -8,7 +8,6 @@ const Timer = ({ initialTime, timerOn, setTime }) => {
   const countUp = () => {
     setSeconds((prevTime) => {
       const timeLeft = prevTime + 1;
-
       return timeLeft;
     });
   };
@@ -42,6 +41,12 @@ const Timer = ({ initialTime, timerOn, setTime }) => {
 
     return () => clearInterval(interval.current);
   }, [timerOn]);
+
+  useEffect(() => {
+    if (initialTime === 0) {
+      setSeconds(initialTime);
+    }
+  }, [initialTime]);
 
   return (
     <View style={styles.timer}>
