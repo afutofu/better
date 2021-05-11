@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import moment from "moment";
 
 export const TasksContext = createContext();
 
@@ -10,8 +11,8 @@ export const TasksContextProvider = ({ children }) => {
       name: "English Essay",
       time: 700,
       timeHistory: [
-        { id: 1, time: 300 },
-        { id: 0, time: 400 },
+        { id: 1, time: 300, date: "May 11th 21, 10:12:34" },
+        { id: 0, time: 400, date: "May 11th 21, 05:00:02" },
       ],
     },
   ]);
@@ -36,7 +37,14 @@ export const TasksContextProvider = ({ children }) => {
           return {
             ...task,
             time: task.time + time,
-            timeHistory: [{ id: Date.now(), time }, ...task.timeHistory],
+            timeHistory: [
+              {
+                id: Date.now(),
+                time,
+                date: moment().format("MMMM Do YY, hh:mm:ss"),
+              },
+              ...task.timeHistory,
+            ],
           };
         }
         return task;
