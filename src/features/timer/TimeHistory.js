@@ -22,8 +22,11 @@ const TimeHistory = ({ history }) => {
           renderItem={({ item, index }) => {
             return (
               <View key={index} style={styles.timeItem}>
-                <Text style={styles.timeAmount}>{formatTime(item.time)}</Text>
-                <Text style={styles.deleteButton}>-</Text>
+                <Text style={styles.text}>{item.date}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={styles.text}>{formatTime(item.time)}</Text>
+                  <Text style={styles.deleteButton}>-</Text>
+                </View>
               </View>
             );
           }}
@@ -36,8 +39,6 @@ const TimeHistory = ({ history }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
   },
   history: {
     flex: 1,
@@ -47,13 +48,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    paddingHorizontal: 30,
+    paddingVertical: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
-  timeAmount: {
-    fontSize: 16,
+  text: {
+    color: "black",
+    fontSize: 20,
   },
   deleteButton: {
     color: "red",
+    fontSize: 20,
+    marginLeft: 10,
   },
 });
 
