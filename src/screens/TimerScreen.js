@@ -25,6 +25,7 @@ const TimerScreen = ({ route }) => {
   const onSaveTime = (time) => {
     if (!timerOn) {
       saveTaskTime(task.id, time);
+      setTime(0);
     }
   };
 
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
   controls: {
     flex: 0.3,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    paddingHorizontal: 30,
+    justifyContent: "space-between",
     alignItems: "center",
   },
   buttonTextStyle: {
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
   data: {
     flex: 0.3,
     backgroundColor: "aquamarine",
+    borderTopWidth: 1,
   },
 });
 
