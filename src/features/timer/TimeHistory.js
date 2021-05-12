@@ -68,11 +68,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 7,
     borderBottomWidth: 1,
-    borderBottomColor: "black",
+    borderBottomColor: "#25e6cf",
   },
   text: {
     color: "black",
-    fontSize: 20,
+    fontSize: 16,
   },
   deleteButton: {
     color: "red",
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   deleteButtonText: {
-    fontSize: 20,
+    fontSize: 16,
   },
 });
 

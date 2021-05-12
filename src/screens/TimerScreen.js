@@ -66,7 +66,7 @@ const TimerScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.controls}>
         <RoundedButton
-          size={95}
+          size={85}
           textStyle={styles.buttonTextStyle}
           onPress={() => onSaveTime(taskId, time)}
         >
@@ -74,7 +74,7 @@ const TimerScreen = ({ navigation, route }) => {
         </RoundedButton>
         {timerOn ? (
           <RoundedButton
-            size={115}
+            size={100}
             textStyle={styles.buttonTextStyle}
             onPress={() => setTimerOn(false)}
           >
@@ -82,7 +82,7 @@ const TimerScreen = ({ navigation, route }) => {
           </RoundedButton>
         ) : (
           <RoundedButton
-            size={115}
+            size={100}
             textStyle={styles.buttonTextStyle}
             onPress={() => setTimerOn(true)}
           >
@@ -91,7 +91,7 @@ const TimerScreen = ({ navigation, route }) => {
         )}
 
         <RoundedButton
-          size={95}
+          size={85}
           textStyle={styles.buttonTextStyle}
           onPress={() => clearTimeHistory(taskId)}
         >
@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "#ddd",
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
   },
   controls: {
     flex: 0.3,
@@ -146,6 +149,7 @@ const styles = StyleSheet.create({
   data: {
     flex: 0.3,
     backgroundColor: "aquamarine",
+    borderColor: "#ddd",
     borderTopWidth: 1,
   },
 });

@@ -58,9 +58,11 @@ const Timer = ({ initialTime, timerOn, setTime }) => {
 const styles = StyleSheet.create({
   timer: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   time: {
-    fontSize: 120,
+    fontSize: 90,
   },
 });
 

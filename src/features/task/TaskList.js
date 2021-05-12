@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   taskName: {
-    fontSize: 20,
+    fontSize: 18,
   },
   timeAmount: {
-    fontSize: 16,
+    fontSize: 18,
   },
 });
 
