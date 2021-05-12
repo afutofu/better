@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import moment from "moment";
 
 export const TasksContext = createContext();
@@ -17,10 +17,6 @@ export const TasksContextProvider = ({ children }) => {
     },
   ]);
 
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
-
   const addTask = (task) => {
     const newTask = { id: Date.now(), name: task, time: 0, timeHistory: [] };
     if (task) {
@@ -28,6 +24,12 @@ export const TasksContextProvider = ({ children }) => {
         return [newTask, ...prevTasks];
       });
     }
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks((prevTasks) => {
+      return prevTasks.filter((task) => task.id !== taskId);
+    });
   };
 
   const saveTaskTime = (taskId, time) => {
@@ -93,6 +95,7 @@ export const TasksContextProvider = ({ children }) => {
       value={{
         tasks,
         addTask,
+        deleteTask,
         saveTaskTime,
         clearTimeHistory,
         deleteTimeHistoryItem,

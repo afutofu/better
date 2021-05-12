@@ -6,7 +6,9 @@ import {
   Text,
   View,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 import RoundedButton from "../components/RoundedButton";
 import Timer from "../features/timer/Timer";
@@ -14,7 +16,7 @@ import TimeHistory from "../features/timer/TimeHistory";
 
 import { TasksContext } from "../contexts/tasks.context";
 
-const TimerScreen = ({ route }) => {
+const TimerScreen = ({ navigation, route }) => {
   const { task } = route.params;
   const [time, setTime] = useState(0);
   const [timeHistory, setTimeHistory] = useState(task.timeHistory);
@@ -22,10 +24,16 @@ const TimerScreen = ({ route }) => {
 
   const {
     tasks,
+    deleteTask,
     saveTaskTime,
     clearTimeHistory,
     deleteTimeHistoryItem,
   } = useContext(TasksContext);
+
+  const onDeleteTask = (taskId) => {
+    navigation.navigate("Home");
+    deleteTask(taskId);
+  };
 
   const onSaveTime = (time) => {
     if (!timerOn && time > 0) {
@@ -35,13 +43,21 @@ const TimerScreen = ({ route }) => {
   };
 
   useEffect(() => {
-    setTimeHistory(tasks[task.id].timeHistory);
+    if (tasks[task.id]) {
+      setTimeHistory(tasks[task.id].timeHistory);
+    }
   }, [tasks]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleArea}>
         <Text style={styles.title}>{task.name}</Text>
+        <TouchableOpacity
+          style={styles.taskDeleteButton}
+          onPress={() => onDeleteTask(task.id)}
+        >
+          <FontAwesome name="trash-o" size={24} color="black" />
+        </TouchableOpacity>
       </View>
       <View style={styles.timer}>
         <Timer initialTime={time} timerOn={timerOn} setTime={setTime} />
@@ -105,6 +121,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  taskDeleteButton: {
+    position: "absolute",
+    right: 30,
   },
   timer: {
     flex: 0.3,
