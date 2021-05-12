@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -7,11 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { TasksContext } from "../../contexts/tasks.context";
-
-const TaskList = ({ navigation }) => {
-  const { tasks } = useContext(TasksContext);
-
+const TaskList = ({ navigation, tasks }) => {
   const formatTime = (secs) => {
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs - hours * 3600) / 60);

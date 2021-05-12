@@ -1,11 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
 
 import AddTask from "../features/task/AddTask";
 import TaskList from "../features/task/TaskList";
 
-const HomeScreen = ({ navigation, tasks, addTask }) => {
+import { TasksContext } from "../contexts/tasks.context";
+
+const HomeScreen = ({ navigation }) => {
+  const { tasks, addTask } = useContext(TasksContext);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
