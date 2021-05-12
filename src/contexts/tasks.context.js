@@ -67,6 +67,27 @@ export const TasksContextProvider = ({ children }) => {
     });
   };
 
+  const deleteTimeHistoryItem = (taskId, timeId) => {
+    setTasks((prevTasks) => {
+      return prevTasks.map((task) => {
+        if (task.id === taskId) {
+          let timeToDelete = 0;
+          for (let i = 0; i < task.timeHistory.length; i++) {
+            if (task.timeHistory[i].id === timeId) {
+              timeToDelete = task.timeHistory[i].time;
+            }
+          }
+          return {
+            ...task,
+            time: task.time - timeToDelete,
+            timeHistory: task.timeHistory.filter((time) => time.id !== timeId),
+          };
+        }
+        return task;
+      });
+    });
+  };
+
   return (
     <TasksContext.Provider
       value={{
@@ -74,6 +95,7 @@ export const TasksContextProvider = ({ children }) => {
         addTask,
         saveTaskTime,
         clearTimeHistory,
+        deleteTimeHistoryItem,
       }}
     >
       {children}
