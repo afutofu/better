@@ -1,5 +1,6 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import moment from "moment";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const TasksContext = createContext();
 
@@ -89,6 +90,36 @@ export const TasksContextProvider = ({ children }) => {
       });
     });
   };
+
+  const saveTasks = async (tasks) => {
+    try {
+      const jsonValue = JSON.stringify(tasks);
+      await AsyncStorage.setItem(`tasks`, jsonValue);
+    } catch (e) {
+      console.log("Error storing", e);
+    }
+  };
+
+  const loadTasks = async () => {
+    try {
+      const value = await AsyncStorage.getItem(`tasks`);
+      if (value !== null) {
+        setTasks(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log("Error loading", e);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  useEffect(() => {
+    if (tasks.length) {
+      saveTasks(tasks);
+    }
+  }, [tasks]);
 
   return (
     <TasksContext.Provider
