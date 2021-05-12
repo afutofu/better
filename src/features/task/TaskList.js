@@ -18,6 +18,10 @@ const TaskList = ({ navigation, tasks }) => {
     return `${secs}s`;
   };
 
+  if (tasks && tasks.length === 0) {
+    return <Text style={styles.noTasks}>Task List Is Empty</Text>;
+  }
+
   return (
     <View style={styles.container}>
       {tasks && tasks.length > 0 && (
@@ -49,8 +53,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     paddingHorizontal: 40,
+  },
+  noTasks: {
+    flex: 1,
+    alignSelf: "center",
+    fontSize: 20,
+    color: "#888",
   },
   list: {
     flex: 1,
