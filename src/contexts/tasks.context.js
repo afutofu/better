@@ -5,16 +5,16 @@ export const TasksContext = createContext();
 
 export const TasksContextProvider = ({ children }) => {
   const [tasks, setTasks] = useState([
-    { id: 0, name: "Meditate", time: 0, timeHistory: [] },
-    {
-      id: 1,
-      name: "English Essay",
-      time: 700,
-      timeHistory: [
-        { id: 1, time: 300, date: "May 11th 21, 10:12:34" },
-        { id: 0, time: 400, date: "May 11th 21, 05:00:02" },
-      ],
-    },
+    // { id: 0, name: "Meditate", time: 0, timeHistory: [] },
+    // {
+    //   id: 1,
+    //   name: "English Essay",
+    //   time: 700,
+    //   timeHistory: [
+    //     { id: 1, time: 300, date: "May 11th 21, 10:12:34" },
+    //     { id: 0, time: 400, date: "May 11th 21, 05:00:02" },
+    //   ],
+    // },
   ]);
 
   const addTask = (task) => {
