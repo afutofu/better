@@ -18,6 +18,7 @@ import { TasksContext } from "../contexts/tasks.context";
 
 const TimerScreen = ({ navigation, route }) => {
   const { task } = route.params;
+  const taskId = task.id;
   const [time, setTime] = useState(0);
   const [timeHistory, setTimeHistory] = useState(task.timeHistory);
   const [timerOn, setTimerOn] = useState(false);
@@ -35,16 +36,17 @@ const TimerScreen = ({ navigation, route }) => {
     deleteTask(taskId);
   };
 
-  const onSaveTime = (time) => {
+  const onSaveTime = (taskId, time) => {
     if (!timerOn && time > 0) {
-      saveTaskTime(task.id, time);
+      saveTaskTime(taskId, time);
       setTime(0);
     }
   };
 
   useEffect(() => {
-    if (tasks[task.id]) {
-      setTimeHistory(tasks[task.id].timeHistory);
+    if (tasks.length > 0) {
+      const task = tasks.find((task) => task.id === taskId);
+      setTimeHistory(task.timeHistory);
     }
   }, [tasks]);
 
@@ -54,7 +56,7 @@ const TimerScreen = ({ navigation, route }) => {
         <Text style={styles.title}>{task.name}</Text>
         <TouchableOpacity
           style={styles.taskDeleteButton}
-          onPress={() => onDeleteTask(task.id)}
+          onPress={() => onDeleteTask(taskId)}
         >
           <FontAwesome name="trash-o" size={24} color="black" />
         </TouchableOpacity>
@@ -66,7 +68,7 @@ const TimerScreen = ({ navigation, route }) => {
         <RoundedButton
           size={95}
           textStyle={styles.buttonTextStyle}
-          onPress={() => onSaveTime(time)}
+          onPress={() => onSaveTime(taskId, time)}
         >
           Save
         </RoundedButton>
@@ -91,7 +93,7 @@ const TimerScreen = ({ navigation, route }) => {
         <RoundedButton
           size={95}
           textStyle={styles.buttonTextStyle}
-          onPress={() => clearTimeHistory(task.id)}
+          onPress={() => clearTimeHistory(taskId)}
         >
           Clear
         </RoundedButton>
@@ -100,7 +102,7 @@ const TimerScreen = ({ navigation, route }) => {
         <TimeHistory
           history={timeHistory}
           onDeleteTimeItem={deleteTimeHistoryItem}
-          taskId={task.id}
+          taskId={taskId}
         />
       </View>
     </SafeAreaView>
