@@ -1,7 +1,13 @@
 import React from "react";
-import { StyleSheet, FlatList, View, Text } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
-const TimeHistory = ({ history }) => {
+const TimeHistory = ({ history, onDeleteTimeItem, taskId }) => {
   const formatTime = (secs) => {
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs - hours * 3600) / 60);
@@ -23,9 +29,20 @@ const TimeHistory = ({ history }) => {
             return (
               <View key={index} style={styles.timeItem}>
                 <Text style={styles.text}>{item.date}</Text>
-                <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <Text style={styles.text}>{formatTime(item.time)}</Text>
-                  <Text style={styles.deleteButton}>-</Text>
+                  <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={() => onDeleteTimeItem(taskId, item.id)}
+                  >
+                    <Text style={styles.deleteButtonText}>-</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             );
@@ -59,8 +76,13 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     color: "red",
+    marginLeft: 5,
+    padding: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  deleteButtonText: {
     fontSize: 20,
-    marginLeft: 10,
   },
 });
 
